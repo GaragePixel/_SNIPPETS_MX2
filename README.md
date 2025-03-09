@@ -36,10 +36,6 @@ To get started with the example codes, follow these steps:
 
 Each sub-directory contains example code snippets demonstrating various features and functionalities of the Mx2 programming language. Below are some of the key areas covered:
 
-## Example Code Snippets
-
-Each sub-directory contains example code snippets demonstrating various features and functionalities of the Mx2 programming language. Below are some of the key areas covered:
-
 - **Basic Syntax and Structure**
   - Examples demonstrating the basic syntax and structure of Mx2 programs.
 
