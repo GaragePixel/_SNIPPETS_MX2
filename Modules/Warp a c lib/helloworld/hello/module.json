@@ -1,0 +1,8 @@
+{
+  "module": "hello",
+  "about": "",
+  "author": "iDkP for GaragePixel",
+  "version": "0.1.0",
+  "support": "https://github.com/GaragePixel/",
+  "depends": ["libc"]
+}
