@@ -1,0 +1,90 @@
+
+Namespace test
+
+#Import "<win32>"
+
+Using win32..
+
+Function MyWndProc:LRESULT_WINAPI( hwnd:HWND,uMsg:UInt,wParam:WPARAM,lParam:LPARAM )
+	
+	
+	
+	Select uMsg
+		Case WM_DESTROY
+			'Const SWP_HIDEWINDOW:UInt			
+			'libc.exit_(0)
+		Case WM_PAINT
+			
+	End 
+	
+	Return DefWindowProcW( hwnd,uMsg,wParam,lParam )
+	
+End
+
+
+
+
+
+Class Win
+	Field winClass:WNDCLASSW
+	Field hwin:HWND
+	Method New(className:String, windowName:String, wsTags:DWORD,x:Int,y:Int,w:Int,h:Int,hWndParent:HWND)
+		Local clsname:=className
+		'Local menuname:="test"
+		
+		Local wc:WNDCLASSW
+		wc.style=CS_HREDRAW | CS_VREDRAW | CS_OWNDC
+		wc.lpfnWndProc=MyWndProc
+		wc.hInstance=GetModuleHandleW( Null )
+		'wc.hIcon=LoadIcon(NULL, IDI_WINLOGO)
+		'wc.hCursor=LoadCursor(Null, IDC_ARROW)
+		'wc.lpszMenuName=Cast<WCHAR Ptr>( libc.malloc( menuname.Length*2+2 ) )
+		'menuname.ToWString( wc.lpszClassName,menuname.Length*2+2 )
+		
+		wc.lpszClassName=Cast<WCHAR Ptr>( libc.malloc( clsname.Length*2+2 ) )
+		clsname.ToWString( wc.lpszClassName,clsname.Length*2+2 )
+		
+		Local cls:=RegisterClassW( Varptr wc )
+		
+		Local hwnd:=CreateWindowW( clsname,windowName,wsTags,x,y,w,h,hWndParent,Null,wc.hInstance,Null )
+		hwin=hwnd
+		'Local hwnd:=CreateWindowW( clsname,"My Window!",WS_OVERLAPPEDWINDOW|WS_VISIBLE,16,16,256,256,Null,Null,wndclass.hInstance,Null )		
+	End
+End 
+
+Function Main()
+	
+	Local msg:MSG
+	
+	Local myWindow1:Win
+	Local myWindow2:Win
+	Local myWindow3:Win
+	Local myWindow4:Win
+	Local myWindow5:Win
+	Local myWindow6:Win
+	Local myWindow7:Win
+	Local myWindow8:Win
+	
+	myWindow1 = New Win("OpenGL","My Application",WS_OVERLAPPEDWINDOW|WS_VISIBLE|WS_EX_TOOLWINDOW,5,5,1510,830,Null)	
+	
+	myWindow2 = New Win("OpenGL","Tool",WS_OVERLAPPEDWINDOW|WS_VISIBLE,10,30,100,500,myWindow1.hwin)	
+	myWindow3 = New Win("OpenGL","Tool",WS_OVERLAPPEDWINDOW|WS_VISIBLE|WS_EX_TOOLWINDOW,120,30,100,500,myWindow1.hwin)
+	myWindow4 = New Win("OpenGL","FX setting",WS_OVERLAPPEDWINDOW|WS_VISIBLE|WS_EX_TOOLWINDOW,230,30,400,500,myWindow1.hwin)
+	myWindow5 = New Win("OpenGL","View",WS_OVERLAPPEDWINDOW|WS_VISIBLE|WS_EX_TOOLWINDOW,630,30,680,500,myWindow1.hwin)
+	
+	myWindow6 = New Win("OpenGL","Explorer",WS_OVERLAPPEDWINDOW|WS_VISIBLE|WS_EX_TOOLWINDOW,10,530,500,300,myWindow1.hwin)
+	myWindow7 = New Win("OpenGL","Timepline",WS_OVERLAPPEDWINDOW|WS_VISIBLE|WS_EX_TOOLWINDOW,510,530,800,300,myWindow1.hwin)
+	
+	myWindow8 = New Win("OpenGL","Templates",WS_OVERLAPPEDWINDOW|WS_VISIBLE|WS_EX_TOOLWINDOW,1310,30,200,800,myWindow1.hwin)	
+	
+'	#rem
+	While GetMessage( Varptr msg,Null,0,0 )
+		
+		TranslateMessage( Varptr msg )
+		
+		DispatchMessage( Varptr msg )
+		
+	Wend
+'	#end
+		
+End
