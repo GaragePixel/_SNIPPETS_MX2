@@ -1,8 +1,8 @@
 #Import "<std>"
 #Import "<mojo>"
 
-Using std..
-Using mojo..
+Using stdlib..
+Using sdk_mojo.m2..
 
 Const WIDTH:Int =640
 Const HEIGHT:Int =400
