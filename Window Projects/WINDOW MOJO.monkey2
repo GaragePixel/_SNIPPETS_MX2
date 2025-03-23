@@ -1,11 +1,11 @@
 
 Namespace myapp
 
-#Import "<std>"
-#Import "<mojo>"
+#Import "<stdlib>"
+#Import "<sdk_mojo>"
 
-Using std..
-Using mojo..
+Using stdlib..
+Using sdk_mojo.m2..
 
 Class MyWindow Extends Window
 
